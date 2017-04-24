@@ -1,6 +1,6 @@
 `define END_COUNT 25
 
-`include "Sign_Extend.v"
+`include "MUX_2to1.v"
 module TestBench;
 
     //Internal Signals
@@ -8,18 +8,25 @@ module TestBench;
 
     //Create tested modle
 
-    reg [16-1:0] x;
-    wire [32-1:0] y;
-    Sign_Extend S(x, y);
+    wire [32-1:0] x;
+    reg  [32-1:0] y, z;
+    reg sel;
+    MUX_2to1 #(.size(32)) M(
+        .data0_i(y),
+        .data1_i(z),
+        .select_i(sel),
+        .data_o(x)
+        );
     //Main function
 
     always #10 CLK = ~CLK;
 
     initial  begin
-        x = 16'b10000000_00000000;
-
-        #20 x = 16'b00000000_00000000;
-        #20 x = 16'b10000000_00001000;
+        y = 1;
+        z = 2;
+        sel = 1;
+        #20;
+        sel = 0;
         #20 $finish;
     end
 
