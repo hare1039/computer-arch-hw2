@@ -1,0 +1,51 @@
+$date
+	Mon Apr 24 14:02:24 2017
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module TestBench $end
+$var wire 32 ! y [31:0] $end
+$var reg 1 " CLK $end
+$var reg 16 # x [15:0] $end
+$scope module S $end
+$var wire 16 $ data_i [15:0] $end
+$var reg 32 % data_o [31:0] $end
+$var integer 32 & i [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b100000 &
+b11111111111111111000000000000000 %
+b1000000000000000 $
+b1000000000000000 #
+1"
+b11111111111111111000000000000000 !
+$end
+#10
+0"
+#20
+b0 !
+b0 %
+b100000 &
+1"
+b0 #
+b0 $
+#30
+0"
+#40
+b11111111111111111000000000001000 !
+b11111111111111111000000000001000 %
+b100000 &
+1"
+b1000000000001000 #
+b1000000000001000 $
+#50
+0"
+#60
+1"
