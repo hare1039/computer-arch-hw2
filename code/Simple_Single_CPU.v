@@ -40,7 +40,7 @@ except some other good names
     wire [2:0] alu_op;
     wire [3:0] alu_ctrl;
     wire [4:0] mux_write_reg;
-
+    wire [32-1:0] alu;
     wire branch_result = branch & zero;
 
     //Greate componentes

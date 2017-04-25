@@ -1,5 +1,6 @@
 `define CYCLE_TIME 10
 `define END_COUNT 25
+`include "Simple_Single_CPU.v"
 module TestBench;
 
 //Internal Signals
@@ -37,6 +38,7 @@ always@(posedge CLK) begin
 			  cpu.RF.Reg_File[5], cpu.RF.Reg_File[6], cpu.RF.Reg_File[7], cpu.RF.Reg_File[8], cpu.RF.Reg_File[9],
 			  cpu.RF.Reg_File[10],cpu.RF.Reg_File[11], cpu.RF.Reg_File[12]
 			  );
+              $finish;
 	end
 	else ;
 end
