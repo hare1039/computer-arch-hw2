@@ -1,6 +1,6 @@
 `define END_COUNT 25
 
-`include "MUX_2to1.v"
+`include "Shift_Left_Two_32.v"
 module TestBench;
 
     //Internal Signals
@@ -10,24 +10,25 @@ module TestBench;
 
     wire [32-1:0] x;
     reg  [32-1:0] y, z;
-    reg sel;
-    MUX_2to1 #(.size(32)) M(
-        .data0_i(y),
-        .data1_i(z),
-        .select_i(sel),
-        .data_o(x)
-        );
+    reg  sel;
+    Shift_Left_Two_32 Shifter(
+            .data_i(y),
+            .data_o(x)
+            );
     //Main function
 
     always #10 CLK = ~CLK;
 
     initial  begin
         y = 1;
-        z = 2;
         sel = 1;
         #20;
+        y = -1111111;
         sel = 0;
-        #20 $finish;
+        #20
+        y = 1710923;
+        #20;
+        $finish;
     end
 
     //Print result to "CO_P2_Result.txt"

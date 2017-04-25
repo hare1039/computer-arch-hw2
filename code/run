@@ -6,88 +6,70 @@
 :vpi_module "vhdl_sys";
 :vpi_module "v2005_math";
 :vpi_module "va_math";
-S_0x7f7f9fc02e00 .scope module, "TestBench" "TestBench" 2 4;
+S_0x7ffdba402060 .scope module, "TestBench" "TestBench" 2 4;
  .timescale 0 0;
-v0x7f7f9fc195f0_0 .var "CLK", 0 0;
-v0x7f7f9fc196a0_0 .var "sel", 0 0;
-v0x7f7f9fc19740_0 .net "x", 31 0, v0x7f7f9fc194a0_0;  1 drivers
-v0x7f7f9fc19810_0 .var "y", 31 0;
-v0x7f7f9fc198c0_0 .var "z", 31 0;
-E_0x7f7f9fc04a90 .event posedge, v0x7f7f9fc195f0_0;
-S_0x7f7f9fc09310 .scope module, "M" "MUX_2to1" 2 14, 3 3 0, S_0x7f7f9fc02e00;
+v0x7ffdba4126c0_0 .var "CLK", 0 0;
+v0x7ffdba412760_0 .var "sel", 0 0;
+v0x7ffdba412800_0 .net "x", 31 0, L_0x7ffdba412a80;  1 drivers
+v0x7ffdba4128d0_0 .var "y", 31 0;
+E_0x7ffdba4021c0 .event posedge, v0x7ffdba4126c0_0;
+S_0x7ffdba4021f0 .scope module, "Shifter" "Shift_Left_Two_32" 2 14, 3 1 0, S_0x7ffdba402060;
  .timescale 0 0;
-    .port_info 0 /INPUT 32 "data0_i"
-    .port_info 1 /INPUT 32 "data1_i"
-    .port_info 2 /INPUT 1 "select_i"
-    .port_info 3 /OUTPUT 32 "data_o"
-P_0x7f7f9fc05500 .param/l "size" 0 3 10, +C4<00000000000000000000000000100000>;
-v0x7f7f9fc09590_0 .net "data0_i", 31 0, v0x7f7f9fc19810_0;  1 drivers
-v0x7f7f9fc19400_0 .net "data1_i", 31 0, v0x7f7f9fc198c0_0;  1 drivers
-v0x7f7f9fc194a0_0 .var "data_o", 31 0;
-v0x7f7f9fc19530_0 .net "select_i", 0 0, v0x7f7f9fc196a0_0;  1 drivers
-E_0x7f7f9fc04340 .event edge, v0x7f7f9fc19530_0, v0x7f7f9fc09590_0, v0x7f7f9fc19400_0;
-    .scope S_0x7f7f9fc09310;
+    .port_info 0 /INPUT 32 "data_i"
+    .port_info 1 /OUTPUT 32 "data_o"
+v0x7ffdba4023d0_0 .net *"_s1", 29 0, L_0x7ffdba412980;  1 drivers
+L_0x108bbd008 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0x7ffdba412490_0 .net/2u *"_s2", 1 0, L_0x108bbd008;  1 drivers
+v0x7ffdba412530_0 .net "data_i", 31 0, v0x7ffdba4128d0_0;  1 drivers
+v0x7ffdba4125e0_0 .net "data_o", 31 0, L_0x7ffdba412a80;  alias, 1 drivers
+L_0x7ffdba412980 .part v0x7ffdba4128d0_0, 0, 30;
+L_0x7ffdba412a80 .concat [ 2 30 0 0], L_0x108bbd008, L_0x7ffdba412980;
+    .scope S_0x7ffdba402060;
 T_0 ;
-    %wait E_0x7f7f9fc04340;
-    %load/vec4 v0x7f7f9fc19530_0;
-    %pad/u 32;
-    %cmpi/e 0, 0, 32;
-    %flag_mov 8, 4;
-    %jmp/0 T_0.0, 8;
-    %load/vec4 v0x7f7f9fc09590_0;
-    %jmp/1 T_0.1, 8;
-T_0.0 ; End of true expr.
-    %load/vec4 v0x7f7f9fc19400_0;
-    %jmp/0 T_0.1, 8;
- ; End of false expr.
-    %blend;
-T_0.1;
-    %store/vec4 v0x7f7f9fc194a0_0, 0, 32;
-    %jmp T_0;
-    .thread T_0, $push;
-    .scope S_0x7f7f9fc02e00;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7ffdba4126c0_0, 0, 1;
+    %end;
+    .thread T_0;
+    .scope S_0x7ffdba402060;
 T_1 ;
-    %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x7f7f9fc195f0_0, 0, 1;
-    %end;
-    .thread T_1;
-    .scope S_0x7f7f9fc02e00;
-T_2 ;
     %delay 10, 0;
-    %load/vec4 v0x7f7f9fc195f0_0;
+    %load/vec4 v0x7ffdba4126c0_0;
     %inv;
-    %store/vec4 v0x7f7f9fc195f0_0, 0, 1;
-    %jmp T_2;
-    .thread T_2;
-    .scope S_0x7f7f9fc02e00;
-T_3 ;
+    %store/vec4 v0x7ffdba4126c0_0, 0, 1;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0x7ffdba402060;
+T_2 ;
     %pushi/vec4 1, 0, 32;
-    %store/vec4 v0x7f7f9fc19810_0, 0, 32;
-    %pushi/vec4 2, 0, 32;
-    %store/vec4 v0x7f7f9fc198c0_0, 0, 32;
+    %store/vec4 v0x7ffdba4128d0_0, 0, 32;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x7f7f9fc196a0_0, 0, 1;
+    %store/vec4 v0x7ffdba412760_0, 0, 1;
     %delay 20, 0;
+    %pushi/vec4 4293856185, 0, 32;
+    %store/vec4 v0x7ffdba4128d0_0, 0, 32;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x7f7f9fc196a0_0, 0, 1;
+    %store/vec4 v0x7ffdba412760_0, 0, 1;
     %delay 20, 0;
-    %vpi_call 2 30 "$finish" {0 0 0};
+    %pushi/vec4 1710923, 0, 32;
+    %store/vec4 v0x7ffdba4128d0_0, 0, 32;
+    %delay 20, 0;
+    %vpi_call 2 31 "$finish" {0 0 0};
     %end;
+    .thread T_2;
+    .scope S_0x7ffdba402060;
+T_3 ;
+    %wait E_0x7ffdba4021c0;
+    %jmp T_3;
     .thread T_3;
-    .scope S_0x7f7f9fc02e00;
+    .scope S_0x7ffdba402060;
 T_4 ;
-    %wait E_0x7f7f9fc04a90;
-    %jmp T_4;
-    .thread T_4;
-    .scope S_0x7f7f9fc02e00;
-T_5 ;
-    %vpi_call 2 39 "$dumpfile", "result.vcd" {0 0 0};
-    %vpi_call 2 40 "$dumpvars" {0 0 0};
+    %vpi_call 2 40 "$dumpfile", "result.vcd" {0 0 0};
+    %vpi_call 2 41 "$dumpvars" {0 0 0};
     %end;
-    .thread T_5;
+    .thread T_4;
 # The file index is used to find the file name in the following table.
 :file_names 4;
     "N/A";
     "<interactive>";
     "handmade_testbench.v";
-    "./MUX_2to1.v";
+    "./Shift_Left_Two_32.v";
