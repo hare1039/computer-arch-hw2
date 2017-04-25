@@ -27,24 +27,41 @@ module Decoder(
 
 
     //Main function
-    // target: ADD, ADDi, SUB, AND, OR, SLT, SLTU, BEQ
-
     always @ ( * ) begin
-        if (instr_op_i == 6'h0) begin
-            ALU_op_o <= 4'b0000;
+        if (instr_op_i == 6'b000000) begin      //r-type
+            ALU_op_o  = 3'b010;
+            ALUSrc_o  = 0;
+            RegWrite_o= 1;
+            RegDst_o  = 1;
+            Branch_o  = 0;
         end
-        else if (instr_op_i == 6'h8) begin
-            ALU_op_o <= 
+        else if (instr_op_i == 6'b110001) begin //lw
+            ALU_op_o  = 3'b000;
+            ALUSrc_o  = 1;
+            RegWrite_o= 1;
+            RegDst_o  = 0;
+            Branch_o  = 0;
+        end
+        else if(instr_op_i == 6'b110101)begin  //sw
+            ALU_op_o  = 3'b000;
+            ALUSrc_o  = 1;
+            RegWrite_o= 0;
+            RegDst_o  = 1'bx;
+            Branch_o  = 0;
+        end
+        else if(instr_op_i == 6'b001000)begin    //brench
+            ALU_op_o   = 3'b001;
+            ALUSrc_o   = 0;
+            RegWrite_o = 0;
+            RegDst_o   = 1'bx;
+            Branch_o   = 1;
         end
         else begin
-
+            ALU_op_o  = 3'bxxx;
+            ALUSrc_o  = 1'bx;
+            RegWrite_o= 1'bx;
+            RegDst_o  = 1'bx;
+            Branch_o  = 1'bx;
         end
     end
-
-
-
-
-
-
-
 endmodule
